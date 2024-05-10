@@ -118,3 +118,22 @@ let activities = [
     price: 0.0,
   },
 ];
+
+const categoryDropdown = document.getElementById("category");
+const activityListbox = document.getElementById("activity-items");
+
+function updateListbox() {
+  // Clear the listbox
+  activityListbox.innerText = "";
+  // Get the selected category
+  const selectedCategory = categoryDropdown.value;
+  // If a category is selected, populate the listbox
+  if (selectedCategory) {
+    const categoryItems = menu[selectedCategory];
+    categoryItems.forEach((item) => {
+      const option = document.createElement("option");
+      option.text = item;
+      activityListbox.add(option);
+    });
+  }
+}
