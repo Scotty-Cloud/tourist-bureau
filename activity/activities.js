@@ -124,15 +124,16 @@ const activityListbox = document.getElementById("activity-items");
 
 function updateListbox() {
   // Clear the listbox
-  activityListbox.innerText = "";
+  activityListbox.innerHTML = "";
   // Get the selected category
   const selectedCategory = categoryDropdown.value;
   // If a category is selected, populate the listbox
   if (selectedCategory) {
-    const categoryItems = menu[selectedCategory];
-    categoryItems.forEach((item) => {
+    const categoryItems = activities.filter(activity => activity.category === selectedCategory);
+    categoryItems.forEach(item => {
       const option = document.createElement("option");
-      option.text = item;
+      option.value = item.id; // Set the value of the option to the activity ID
+      option.text = item.name; // Set the text of the option to the activity name
       activityListbox.add(option);
     });
   }
