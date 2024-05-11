@@ -120,11 +120,12 @@ let activities = [
 ];
 
 const categoryDropdown = document.getElementById("category");
+const activityItems = document.getElementById("activity-list")
 const activityListbox = document.getElementById("activity-items");
 
 function updateListbox() {
   // Clear the listbox
-  activityListbox.innerHTML = "";
+  activityListbox.innerText = "";
   // Get the selected category
   const selectedCategory = categoryDropdown.value;
   // If a category is selected, populate the listbox
@@ -133,8 +134,9 @@ function updateListbox() {
     categoryItems.forEach(item => {
       const option = document.createElement("option");
       option.value = item.id; // Set the value of the option to the activity ID
-      option.text = item.name; // Set the text of the option to the activity name
+      option.text = `${item.name} - ${item.description}` // Set the text of the option to the activity name
       activityListbox.add(option);
     });
   }
+  
 }
