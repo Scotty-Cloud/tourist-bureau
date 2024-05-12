@@ -95,7 +95,7 @@ let activities = [
     id: "WT-102",
     name: "Lone Oak Winery",
     description:
-      "We are a family and friend centered winery that thrives to make each of our guests feel right at home. With a growing wine list of the finest local wines, we offer tours and an incredible experience. We are open for to-go, curbside, and delivery.",
+      "We are a family and friend centered winery that thrives to make each of our guests feel right at home.With a growing wine list of the finest local wines, we offer tours and an incredible experience. We are open for to-go, curbside, and delivery.",
     location: "121 Burleson Court",
     price: 0.0,
   },
@@ -119,24 +119,57 @@ let activities = [
   },
 ];
 
+// const categoryDropdown = document.getElementById("category");
+// const activityItems = document.getElementById("activity-list");
+// const activityListbox = document.getElementById("activity-items");
+
+// function updateListbox() {
+//   // Clear the listbox
+//   activityListbox.innerText = "";
+//   // Get the selected category
+//   const selectedCategory = categoryDropdown.value;
+//   // If a category is selected, populate the listbox
+//   if (selectedCategory) {
+//     const categoryItems = activities.filter(
+//       (activity) => activity.category === selectedCategory
+//     );
+//     categoryItems.forEach((item) => {
+//       const option = document.createElement("option");
+//       option.value = item.activities; // Set the value of the option to the activity ID
+//       option.text = `${item.name} ${item.description}`;
+//       // Set the text of the option to the activity name
+//       activityListbox.add(option);
+//     });
+//   }
+// }
+
+// window.onload = init;
+
 const categoryDropdown = document.getElementById("category");
-const activityItems = document.getElementById("activity-list")
-const activityListbox = document.getElementById("activity-items");
+const activityItems = document.getElementById("activity-items");
+
+// Populate categories dropdown
+for (const category of categories) {
+  const option = document.createElement("option");
+  option.value = category;
+  option.text = category;
+  categoryDropdown.add(option);
+}
 
 function updateListbox() {
-  // Clear the listbox
-  activityListbox.innerText = "";
+  // Clear the content of activityItems
+  activityItems.innerText = "";
   // Get the selected category
   const selectedCategory = categoryDropdown.value;
-  // If a category is selected, populate the listbox
+  // If a category is selected, populate activityItems
   if (selectedCategory) {
-    const categoryItems = activities.filter(activity => activity.category === selectedCategory);
-    categoryItems.forEach(item => {
-      const option = document.createElement("option");
-      option.value = item.id; // Set the value of the option to the activity ID
-      option.text = `${item.name} - ${item.description}` // Set the text of the option to the activity name
-      activityListbox.add(option);
-    });
+    for (const item of activities) {
+      if (item.category === selectedCategory) {
+        const activityItem = document.createElement("p");
+        activityItem.innerText = `${item.name} ${item.description}`;
+        activityItems.appendChild(activityItem);
+      }
+    }
   }
-  
 }
+window.onload = init;

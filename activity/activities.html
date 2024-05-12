@@ -1,18 +1,18 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Activities Page</title>
     <link rel="stylesheet" href="activities.css" />
     <script defer src="activities.js"></script>
+    <title>Activities Page</title>
   </head>
   <body>
     <main>
-      <section>
+      <form>
         <h1>Activity</h1>
         <label for="category">Select something to do:</label>
-        <select id="category" onchange="updateListbox()">
+        <select  id="category" onchange="updateListbox()">
           <option value="">Select</option>
           <option value="Adventures">Adventures</option>
           <option value="Arts & Crafts">Arts & Crafts</option>
@@ -22,7 +22,33 @@
         </select>
         <label for="activity-items">Activities</label>
         <select id="activity-items" size="10"></select>
-      </section>
+      </form>
     </main>
   </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="activities.css" />
+  <script defer src="activities.js"></script>
+  <title>Activities Page</title>
+</head>
+<body>
+  <main>
+    <div class="categories-box">
+      <h2>Categories</h2>
+      <select id="category" onchange="updateListbox()">
+        <option value="">Select</option>
+        <!-- Categories will be populated dynamically -->
+      </select>
+    </div>
+    <div class="activities-box">
+      <h2>Activities</h2>
+      <p id="activity-items" size="10"></p>
+    </div>
+  </main>
+</body>
 </html>
