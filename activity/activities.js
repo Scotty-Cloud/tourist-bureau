@@ -172,4 +172,5 @@ function updateListbox() {
     }
   }
 }
+
 window.onload = init;
