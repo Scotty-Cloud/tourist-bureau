@@ -95,7 +95,7 @@ let activities = [
     id: "WT-102",
     name: "Lone Oak Winery",
     description:
-      "We are a family and friend centered winery that thrives to make each of our guests feel right at home.With a growing wine list of the finest local wines, we offer tours and an incredible experience. We are open for to-go, curbside, and delivery.",
+      "We are a family and friend centered winery that thrives to make each of our guests feel right at home. With a growing wine list of the finest local wines, we offer tours and an incredible experience. We are open for to-go, curbside, and delivery.",
     location: "121 Burleson Court",
     price: 0.0,
   },
@@ -119,58 +119,89 @@ let activities = [
   },
 ];
 
-// const categoryDropdown = document.getElementById("category");
-// const activityItems = document.getElementById("activity-list");
-// const activityListbox = document.getElementById("activity-items");
+const categoryList = document.getElementById("categoryList");
+const activityList = document.getElementById("activityList");
+const seledtedCategory = document.getElementById("seledtedCategory");
+const seledtedActivity = document.getElementById("seledtedActivity");
 
-// function updateListbox() {
-//   // Clear the listbox
-//   activityListbox.innerText = "";
-//   // Get the selected category
-//   const selectedCategory = categoryDropdown.value;
-//   // If a category is selected, populate the listbox
-//   if (selectedCategory) {
-//     const categoryItems = activities.filter(
-//       (activity) => activity.category === selectedCategory
-//     );
-//     categoryItems.forEach((item) => {
-//       const option = document.createElement("option");
-//       option.value = item.activities; // Set the value of the option to the activity ID
-//       option.text = `${item.name} ${item.description}`;
-//       // Set the text of the option to the activity name
-//       activityListbox.add(option);
-//     });
-//   }
-// }
+window.onload = function () {
+  createCategoryList();
 
-// window.onload = init;
+  categoryList.onchange = createActivityList;
+  activityList.onchange = displayActivityFeatures;
 
-const categoryDropdown = document.getElementById("category");
-const activityItems = document.getElementById("activity-items");
+  purchaseButton.onclick = paymentDetails;
+};
 
-// Populate categories dropdown
-for (const category of categories) {
-  const option = document.createElement("option");
-  option.value = category;
-  option.text = category;
-  categoryDropdown.add(option);
+function createCategoryList() {
+  for (const category of categories) {
+    let categoryOption = new Option(category);
+    categoryOption.textContent = category;
+    categoryList.appendChild(categoryOption);
+  }
 }
 
-function updateListbox() {
-  // Clear the content of activityItems
-  activityItems.innerText = "";
-  // Get the selected category
-  const selectedCategory = categoryDropdown.value;
-  // If a category is selected, populate activityItems
-  if (selectedCategory) {
-    for (const item of activities) {
-      if (item.category === selectedCategory) {
-        const activityItem = document.createElement("p");
-        activityItem.innerText = `${item.name} ${item.description}`;
-        activityItems.appendChild(activityItem);
+function createActivityList() {
+  activityList.options.length = 1;
+
+  for (const activity of activities) {
+    if (activity.category == categoryList.selectedOptions[0].textContent) {
+      let activityOption = new Option(activity);
+
+      activityOption.textContent = activity.name;
+      activityList.appendChild(activityOption);
+    }
+  }
+}
+const activityId = document.getElementById("activityId");
+const descriptionText = document.getElementById("descriptionText");
+const locationText = document.getElementById("locationText");
+const priceInfo = document.getElementById("priceInfo");
+const purchaseTicket = document.getElementById("purchaseTicket");
+const paymentForm = document.getElementById("paymentForm");
+const signHidden = document.getElementById("signHidden");
+
+function displayActivityFeatures() {
+  for (const activity of activities) {
+    if (activity.name == activityList.selectedOptions[0].textContent) {
+      seledtedActivity.innerText = activity.name;
+      activityId.innerText = activity.id;
+      descriptionText.innerText = activity.description;
+      locationText.innerText = activity.location;
+      priceInfo.innerText = activity.price;
+
+      if (priceInfo.innerText == 0) {
+        priceInfo.innerText = "Free";
+        signHidden.innerText = "";
+      } else {
+        signHidden.innerText = "$";
+      }
+
+      if (priceInfo.innerText > 0) {
+        purchaseTicket.style.display = "block";
+      } else {
+        purchaseTicket.style.display = "none";
+      }
+
+      if (purchaseTicket.style.display == "block") {
+        paymentForm.style.display = "block";
+      } else {
+        paymentForm.style.display = "none";
       }
     }
   }
 }
 
-window.onload = init;
+const ticketAmount = document.getElementById("ticketAmount");
+const purchaseButton = document.getElementById("purchaseButton");
+const totalDetails = document.getElementById("totalDetails");
+const emailElement = document.getElementById("email");
+const purchaseConfirmation = document.getElementById("purchaseConfirmation");
+
+function paymentDetails() {
+  let numberTicket = Number(ticketAmount.value);
+
+  let totalCost = numberTicket * priceInfo.innerText;
+
+  totalDetails.innerText = totalCost;
+}
