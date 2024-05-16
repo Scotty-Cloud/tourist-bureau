@@ -195,8 +195,6 @@ function displayActivityFeatures() {
 const ticketAmount = document.getElementById("ticketAmount");
 const purchaseButton = document.getElementById("purchaseButton");
 const totalDetails = document.getElementById("totalDetails");
-const emailElement = document.getElementById("email");
-const purchaseConfirmation = document.getElementById("purchaseConfirmation");
 
 function paymentDetails() {
   let numberTicket = Number(ticketAmount.value);
